@@ -43,7 +43,7 @@ class ObjFile:
     >>> obj.ObjInfo()
     Num vertices  :    8147
     Num faces     :    16301
-    Min/Max       :    [-0.094572  0.       -0.061874] [0.060935 0.186643 0.05869 ]
+    Min/Max       :    [-0.095  0.    -0.062] [ 0.061  0.187  0.059]
     >>> obj.Plot(out_file)
     >>> import filecmp
     >>> filecmp.cmp('../obj/bun_zipper_res2.png', '../images/bun_zipper_res2.png')
@@ -58,8 +58,9 @@ class ObjFile:
         
     def ObjInfo(self):
         print ("Num vertices  :    %d"%(len(self.nodes)))
-        print ("Num faces     :    %d"%(len(self.faces)))
-        print ("Min/Max       :    %s %s"%(self.MinMaxNodes()))
+        print ("Num faces     :    %d"%(len(self.faces))) 
+        nmin,nmax=self.MinMaxNodes()
+        print ("Min/Max       :    %s %s"%(np.around(nmin,3), np.around(nmax,3) ))
 
     @staticmethod
     def MinMax3d(arr):
