@@ -53,12 +53,6 @@ class ObjFile:
     def __init__(self, obj_file=None):
         self.nodes=None
         self.faces=None
-        self.edges=None
-        self.face_edges=None
-        self.edge_faces=None
-        self.normals=None
-        self.centroids=None
-        self.node_faces=None
         if obj_file:
             self.ObjParse(obj_file)
         
@@ -67,7 +61,7 @@ class ObjFile:
         print ("Num faces     :    %d"%(len(self.faces)))
         print ("Min/Max       :    %s %s"%(self.MinMaxNodes()))
 
-
+    @staticmethod
     def MinMax3d(arr):
         nmin=1E9*np.ones((3))
         nmax=-1E9*np.ones((3))
@@ -117,6 +111,7 @@ class ObjFile:
             f.write('\n')
 
             
+    @staticmethod
     def ToFloats(n):
         if isinstance(n,list):
             v=[]
@@ -126,6 +121,7 @@ class ObjFile:
         else:
             return float(n)
                 
+    @staticmethod
     def ToInts(n):
         if isinstance(n,list):
             v=[]
@@ -135,6 +131,7 @@ class ObjFile:
         else:
             return int(n)
                 
+    @staticmethod
     def Normalize(v):
         v2=np.linalg.norm(v)
         if v2<0.000000001:
@@ -154,6 +151,7 @@ class ObjFile:
                 trifaces.append(f2)
         return trifaces
     
+    @staticmethod
     def ScaleVal(v,scale,minval=True):
         
         if minval:
