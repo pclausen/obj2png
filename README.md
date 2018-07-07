@@ -67,6 +67,7 @@ Supported formats with current MatPlotLib (Versoin 2.2.2) are: eps, jpeg, jpg, p
 
 I have not put much thought into this but svg may be the better choice than png...
 
+Bunny in svg format below. Zoom in your browser,  say 300%, and compare with the png file above).
 
 <img src="./images/bunny.svg" />
 
