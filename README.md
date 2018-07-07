@@ -1,6 +1,6 @@
 # obj2png - converting 3D triangular mesh to picture file with MatPlotLib
 
-A small python tool for converting 3D triangular mesh to picture file with [MatPlotLib](https://matplotlib.org) 2.2.2 and Python](https://www.python.org/) 3.6.6 installed with [Anaconda](https://anaconda.org/anaconda)
+A small python tool for converting 3D triangular mesh to picture file with [MatPlotLib](https://matplotlib.org) 2.2.2 and [Python](https://www.python.org/) 3.6.6 installed with [Anaconda](https://anaconda.org/anaconda)
 
 In the following I have used the [Stanford bunny](http://graphics.stanford.edu/data/3Dscanrep/) (bun_zipper_res2.ply) converted to [WaveFront .obj](https://en.wikipedia.org/wiki/Wavefront_.obj_file) format using [meshconv](http://www.patrickmin.com/meshconv/)
 
