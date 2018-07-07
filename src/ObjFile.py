@@ -40,14 +40,16 @@ class ObjFile:
     >>> obj_file = '../obj/bun_zipper_res2.obj'
     >>> out_file = '../obj/bun_zipper_res2.png'
     >>> obj = ObjFile(obj_file)
-    >>> obj.ObjInfo()
-    Num vertices  :    8147
-    Num faces     :    16301
-    Min/Max       :    [-0.095  0.    -0.062] [ 0.061  0.187  0.059]
-    >>> obj.Plot(out_file)
-    >>> import filecmp
-    >>> filecmp.cmp('../obj/bun_zipper_res2.png', '../images/bun_zipper_res2.png')
+    >>> len(obj.nodes)==8147
     True
+    >>> len(obj.faces)==16301
+    True
+    >>> nmin,nmax=obj.MinMaxNodes()
+    >>> np.allclose(nmin, np.array([-0.094572,  0.      , -0.061874]) )
+    True
+    >>> np.allclose(nmax, np.array([0.060935, 0.186643, 0.05869 ]))
+    True
+    >>> obj.Plot(out_file)
     """
     
     def __init__(self, obj_file=None):
