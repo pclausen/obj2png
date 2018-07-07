@@ -11,9 +11,9 @@ In the following I have used the [Stanford bunny](http://graphics.stanford.edu/d
 $ python obj2png.py -i bunny.obj -v
 ```
 
-<img src="bunny_30_30_view.png" />
+<img src="./images/bunny_30_30_view.png" />
 
-Rotate the object to the right position and note the azimuth and elevation numbers for example azimuth=-95 elevation=100.
+Rotate the object to the right position and note the azimuth and elevation numb (stl, ply, ...)ers for example azimuth=-95 elevation=100.
 
 Now create the image:
 ```
@@ -23,7 +23,7 @@ Converting bunny.obj to bunny.png
 ```
 See result in file bunny.png:
 
-<img src="bunny.png" />
+<img src="./images/bunny.png" />
 
 
 ## More detailed help
@@ -57,6 +57,8 @@ optional arguments:
                         from elevation -180:180 and azim -180:180
 ```                      
 
+Note that inputs can be a number of files, eg. -i f1.obj f2.obj` or a glob match eg. `-i *.obj`
+
 ## Other output formats
 
 Use --output to use other output file formats
@@ -66,14 +68,28 @@ Supported formats with current MatPlotLib (Versoin 2.2.2) are: eps, jpeg, jpg, p
 I have not put much thought into this but svg may be the better choice than png...
 
 
-<img src="bunny.svg" />
+<img src="./images/bunny.svg" />
 
-## Other input formats
+## Other input formats (stl, ply, ...)
 
-Use a tool like [meshconv](http://www.patrickmin.com/meshconv/) to convert stl or ply files to obj format.
+Use a tool like [meshconv](http://www.patrickmin.com/meshconv/) to convert stl or ply files to obj format, for example:
+```
+$ meshconv bun_zipper_res2.ply -c obj
+```
+Supported input file types by meshconv:  dxf obj off ply stl 3ds wrl (VRML 2.0 only)
+
+## Limitations
+
+I have not tested really large files but inputs around 10 Mb seems to work OK. If you have really large files this is not the tool to use; use a professional 3D mesh editing tool.
 
 ## How to contribute
 
-Install Python and MatPlotLib, maybe by using Anaconda or by other means. I developed the code using Python 3.6 and have not tested other 
+Install Python and MatPlotLib, maybe by using Anaconda or by other means. I developed the code using Python 3.6 and have not tested other versions of Python but I think porting to Python 2.7 should be easy.
 
 Clone this repo and hack away.
+
+## Support
+
+I created this project in my spare time for fun and mostly for myself. I uploaded it to github because I was searching for such a tool and did not find anything small and lean. I hope anyone in my shoes will find it useful.
+
+I have no intentions about supporting nor maintaining it. The code is quite trivial and any Python programmer should be able to take it and modify it for whatever use.
