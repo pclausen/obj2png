@@ -30,17 +30,26 @@ SOFTWARE.
 
 import re
 import numpy as np
-import scipy.spatial
-from collections import OrderedDict
-
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-
 
 RE=re.compile(r'/\d+')
 
 class ObjFile:
-
+    """
+    >>> obj_file = '../obj/bun_zipper_res2.obj'
+    >>> out_file = '../obj/bun_zipper_res2.png'
+    >>> obj = ObjFile(obj_file)
+    >>> obj.ObjInfo()
+    Num vertices  :    8147
+    Num faces     :    16301
+    Min/Max       :    [-0.094572  0.       -0.061874] [0.060935 0.186643 0.05869 ]
+    >>> obj.Plot(out_file)
+    >>> import filecmp
+    >>> filecmp.cmp('../obj/bun_zipper_res2.png', '../images/bun_zipper_res2.png')
+    True
+    """
+    
     def __init__(self, obj_file=None):
         self.nodes=None
         self.faces=None
@@ -205,9 +214,6 @@ class ObjFile:
                 plt.show()
     
 if __name__ == '__main__':
-    
-    obj_file = 'bunny.obj'
-    obj = ObjFile(obj_file)
-    obj.ObjInfo()
-    obj.Plot()
+    import doctest
+    doctest.testmod()    
     
