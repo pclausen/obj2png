@@ -11,4 +11,14 @@ install:
   
 script:
   - py.test
+  - pyinstaller --onefile --hidden-import tkinter.filedialog  ./src/obj2png.py 
+
+deploy:
+  provider: releases
+  api_key: "GIT HUB OAUTH TOKEN"
+  file: dist/obj2png
+  overwrite: true
+  skip_cleanup: true
+  on:
+    tag: true
 
