@@ -4,6 +4,11 @@ import sys
 sys.path.append('./src')
 
 import numpy as np
+# because of display issue on travis
+# https://stackoverflow.com/questions/4931376/generating-matplotlib-graphs-without-a-running-x-server
+import matplotlib as mpl
+mpl.use('Agg')
+
 import ObjFile
 
 def test_open_obj():
