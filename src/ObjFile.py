@@ -170,6 +170,7 @@ class ObjFile:
             
 
     def Plot(self, output_file=None, elevation=None, azim=None,dpi=None,scale=None,animate=None):
+        plt.ioff()
         tri=self.QuadToTria()
         fig = plt.figure()
         ax = fig.gca(projection='3d')
