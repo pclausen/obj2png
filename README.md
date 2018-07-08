@@ -94,3 +94,13 @@ Clone this repo and hack away.
 I created this project in my spare time for fun and mostly for myself. I uploaded it to github because I was searching for such a tool and did not find anything small and lean. I hope anyone in my shoes will find it useful.
 
 I have no intentions about supporting nor maintaining it. The code is quite trivial and any Python programmer should be able to take it and modify it for whatever use.
+
+## PyInstaller
+
+Following worked on my Ubuntu 16.04.4 LTS with Python3
+```
+pyinstaller --onefile --hidden-import tkinter.filedialog obj2png.py
+``` 
+
+The hidden-import suggestion was a found [here](https://stackoverflow.com/questions/25892336/importerror-no-module-named-filedialog-after-pyinstaller)
+
