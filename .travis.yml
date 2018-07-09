@@ -18,6 +18,5 @@ deploy:
   on:
     repo: pclausen/obj2png	
     python: '2.7'
-    branch: master
 
 
