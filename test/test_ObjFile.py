@@ -1,5 +1,6 @@
 
 import sys
+import os
 # assumed being called from obj2png/
 sys.path.append('./src')
 
@@ -13,7 +14,10 @@ import ObjFile
 
 def test_open_obj():
    obj_file = './obj/bun_zipper_res2.obj'
-   out_file = './obj/bun_zipper_res2.png'
+   odir='test_output'
+   if not os.path.exists(odir):
+      os.mkdir(odir)   
+   out_file = os.path.join(odir, 'bun_zipper_res2.png')
    obj = ObjFile.ObjFile(obj_file)
    assert(len(obj.nodes)==8147)
    assert(len(obj.faces)==16301)
