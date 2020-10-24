@@ -87,7 +87,7 @@ class ObjFile:
         nodes.append([.0,.0,.0])
         faces=[]
         for line in lines:
-            if 'v' == line[0]:
+            if 'v' == line[0] and line[1].isspace(): # do not match "vt" or "vn"
                 v=line.split()
                 nodes.append(ObjFile.ToFloats(v[1:]))
             if 'f' == line[0]:
@@ -97,6 +97,7 @@ class ObjFile:
                 faces.append(ObjFile.ToInts(f[1:]))
     
         self.nodes=np.array(nodes)
+        assert(np.shape(self.nodes)[1]==3)
         self.faces=faces    
 
 
@@ -215,7 +216,4 @@ class ObjFile:
             else:
                 plt.show()
     
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod()    
-    
+
