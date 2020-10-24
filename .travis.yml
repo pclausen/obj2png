@@ -1,7 +1,6 @@
 language: python
 dist: precise
 python:
-- '2.7'
 - '3.5'
 install:
 - pip install -r requirements.txt
@@ -17,6 +16,6 @@ deploy:
   keep-history: true  
   on:
     repo: pclausen/obj2png	
-    python: '2.7'
+    python: '3.5'
 
 
