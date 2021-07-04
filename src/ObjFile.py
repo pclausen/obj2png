@@ -174,10 +174,15 @@ class ObjFile:
         plt.ioff()
         tri=self.QuadToTria()
         fig = plt.figure()
-        ax = fig.gca(projection='3d')
+        #ax = fig.gca(projection='3d')
+        ax = fig.add_subplot(111, projection='3d')
         ax.plot_trisurf(self.nodes[:,0],self.nodes[:,1],self.nodes[:,2], triangles=tri)
         ax.axis('off')
         fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+        # enforce aspect ratio to avoid streching, see Issue https://github.com/pclausen/obj2png/issues/7
+        limits = np.array([getattr(ax, f'get_{axis}lim')() for axis in 'xyz']) 
+        ax.set_box_aspect(np.ptp(limits, axis = 1))
+
         nmin,nmax=self.MinMaxNodes()
         if scale is not None:
             ax.set_xlim(ObjFile.ScaleVal(nmin[0],scale),ObjFile.ScaleVal(nmax[0],scale,False))
