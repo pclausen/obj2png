@@ -33,7 +33,7 @@ For more help run
 $ python obj2png.py --help
 
 usage: obj2png.py [-h] [-i OBJFILES [OBJFILES ...]] [-o OUTFILE] [-a AZIM]
-                  [-e ELEVATION] [-q QUALITY] [-s SCALE] [-v] [-A]
+                  [-e ELEVATION] [-q QUALITY] [--resolution RESOLUTION] [-s SCALE] [-v] [-A]
 
 Obj to png using MatPlotLib
 
@@ -49,6 +49,8 @@ optional arguments:
                         Elevation angle of view in degrees.
   -q QUALITY, --quality QUALITY
                         Image quality (HIGH,MEDIUM,LOW). Default: LOW
+  --resolution RESOLUTION
+                        Image resolution, takes precedence over quality argument. For example 640x480
   -s SCALE, --scale SCALE
                         Scale picture by descreasing boundaries. Lower than 1.
                         gives a larger object.

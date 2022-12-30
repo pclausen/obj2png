@@ -61,6 +61,10 @@ if __name__ == '__main__':
               dest='quality',
               help="Image quality (HIGH,MEDIUM,LOW).  Default: LOW")
 
+    parser.add_argument("--resolution",
+              dest='resolution',
+              help="Image resolution, takes precedence over quality argument. For example 640x480")
+
     parser.add_argument("-s", "--scale",
               dest='scale',
               type=float,
@@ -83,7 +87,7 @@ if __name__ == '__main__':
     objfiles=args.objfiles
     if '*' in objfiles[0]:
         objfiles=glob.glob(objfiles[0])
-    
+
     res={'HIGH':1200,'MEDIUM':600,'LOW':300}
     dpi=None
     if args.quality:
@@ -91,6 +95,13 @@ if __name__ == '__main__':
             dpi=args.quality
         elif args.quality.upper() in res:
             dpi=res[args.quality.upper()]
+
+    width=dpi
+    height=dpi
+    if args.resolution:
+        width, height=args.resolution.split('x')
+        width=int(width)
+        height=int(height)
 
     azim=None
     if args.azim is not None:
@@ -119,7 +130,7 @@ if __name__ == '__main__':
             else:
                 print('Converting %s to %s'%(objfile, outfile))
             ob = ObjFile.ObjFile(objfile)
-            ob.Plot(outfile,elevation=elevation,azim=azim,dpi=dpi,scale=scale,animate=animate)
+            ob.Plot(outfile,elevation=elevation,azim=azim,width=width,height=height,scale=scale,animate=animate)
         else:
             print('File %s not found or not file type .obj'%objfile)
             sys.exit(1)

@@ -170,7 +170,7 @@ class ObjFile:
                 return v*(1.-scale)
             
 
-    def Plot(self, output_file=None, elevation=None, azim=None,dpi=None,scale=None,animate=None):
+    def Plot(self, output_file=None, elevation=None, azim=None,width=None,height=None,scale=None,animate=None):
         plt.ioff()
         tri=self.QuadToTria()
         fig = plt.figure()
@@ -204,6 +204,14 @@ class ObjFile:
             #ax.autoscale_view(tight=True)
             #ax.autoscale(tight=True)
             #ax.margins(tight=True)
+
+            dpi = None
+            if width and height:
+                width_inches = 1. if width >= height else (width / height)
+                height_inches = 1. if height >= width else (height / width)
+                dpi = max(width, height)
+                fig.set_size_inches(width_inches, height_inches)
+
             plt.savefig(output_file,dpi=dpi,transparent=True)
             plt.close()
         else:
