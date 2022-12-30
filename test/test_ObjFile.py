@@ -41,7 +41,7 @@ class TestObjFile(unittest.TestCase):
         obj_file = './obj/bun_zipper_res2.obj'
         odir='test_output'
         if not os.path.exists(odir):
-            os.mkdir(odir)   
+            os.mkdir(odir)
         out_file = os.path.join(odir, 'bun_zipper_res2.png')
         obj = ObjFile.ObjFile(obj_file)
         #print(obj.ObjInfo())
@@ -64,19 +64,24 @@ class TestObjFile(unittest.TestCase):
             zip_ref.extract(os.path.basename(obj_file), os.path.dirname(obj_file))
 
         if not os.path.exists(odir):
-            os.mkdir(odir)   
+            os.mkdir(odir)
         out_file = os.path.join(odir, 'rp_janna_posed_004_30k.png')
         obj = ObjFile.ObjFile(obj_file)
         #print(obj.ObjInfo())
         self.assertTrue(len(obj.nodes)==27555)
         self.assertTrue(len(obj.faces)==55104)
         nmin,nmax=obj.MinMaxNodes()
-        self.assertTrue(np.allclose(nmin, np.array([-0.799216, -1.091205, -0.126377]) ) ) 
+        self.assertTrue(np.allclose(nmin, np.array([-0.799216, -1.091205, -0.126377]) ) )
         self.assertTrue(np.allclose(nmax, np.array([0.80038 , 0.517024, 0.153965] ) ) )
         if os.path.isfile(out_file):
             os.unlink(out_file)
         obj.Plot(out_file)
         self.assertTrue(os.path.isfile(out_file))
+
+
+    def test_face_format(self):
+        obj_file = './obj/test.obj'
+        obj = ObjFile.ObjFile(obj_file)
 
 
 if __name__ == '__main__':
