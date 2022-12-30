@@ -1,22 +1,19 @@
 import sys
 import os
 import zipfile
+import numpy as np
+# because of display issue on travis
+# https://stackoverflow.com/questions/4931376/generating-matplotlib-graphs-without-a-running-x-server
+import matplotlib as mpl
+import unittest
+
+mpl.use("Agg")
 
 # assumed being called from obj2png/
 sys.path.append("./src")
 sys.path.append("../src")
 
-import numpy as np
-
-# because of display issue on travis
-# https://stackoverflow.com/questions/4931376/generating-matplotlib-graphs-without-a-running-x-server
-import matplotlib as mpl
-
-mpl.use("Agg")
-
-import ObjFile
-
-import unittest
+import ObjFile  # noqa E402
 
 
 class TestObjFile(unittest.TestCase):
@@ -81,7 +78,7 @@ class TestObjFile(unittest.TestCase):
 
     def test_face_format(self):
         obj_file = "./obj/test.obj"
-        obj = ObjFile.ObjFile(obj_file)
+        ObjFile.ObjFile(obj_file)
 
 
 if __name__ == "__main__":
