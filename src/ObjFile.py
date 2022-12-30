@@ -51,16 +51,16 @@ class ObjFile:
     True
     >>> obj.Plot(out_file)
     """
-    
+
     def __init__(self, obj_file=None):
         self.nodes=None
         self.faces=None
         if obj_file:
             self.ObjParse(obj_file)
-        
+
     def ObjInfo(self):
         print ("Num vertices  :    %d"%(len(self.nodes)))
-        print ("Num faces     :    %d"%(len(self.faces))) 
+        print ("Num faces     :    %d"%(len(self.faces)))
         nmin,nmax=self.MinMaxNodes()
         print ("Min/Max       :    %s %s"%(np.around(nmin,3), np.around(nmax,3) ))
 
@@ -71,12 +71,12 @@ class ObjFile:
         for a in arr:
             for i in range(3):
                 nmin[i]=min(nmin[i],a[i])
-                nmax[i]=max(nmax[i],a[i])    
+                nmax[i]=max(nmax[i],a[i])
         return (nmin,nmax)
-        
+
     def MinMaxNodes(self):
         return ObjFile.MinMax3d(self.nodes)
-        
+
 
     def ObjParse(self, obj_file ):
         f=open(obj_file)
@@ -91,14 +91,14 @@ class ObjFile:
                 v=line.split()
                 nodes.append( ObjFile.ToFloats(v[1:])[:3] )
             if 'f' == line[0]:
-                # remove /int 
-                line=re.sub(RE,'',line)                
+                # remove /int
+                line=re.sub(RE,'',line)
                 f=line.split()
-                faces.append(ObjFile.ToInts(f[1:]))
-    
+                faces.append(ObjFile.ToInts([s.split('/')[0] for s in f[1:]]))
+
         self.nodes=np.array(nodes)
         assert(np.shape(self.nodes)[1]==3)
-        self.faces=faces    
+        self.faces=faces
 
 
     def ObjWrite(self, obj_file):
@@ -114,7 +114,7 @@ class ObjFile:
                 f.write('%d '%(fff))
             f.write('\n')
 
-            
+
     @staticmethod
     def ToFloats(n):
         if isinstance(n,list):
@@ -124,7 +124,7 @@ class ObjFile:
             return v
         else:
             return float(n)
-                
+
     @staticmethod
     def ToInts(n):
         if isinstance(n,list):
@@ -134,7 +134,7 @@ class ObjFile:
             return v
         else:
             return int(n)
-                
+
     @staticmethod
     def Normalize(v):
         v2=np.linalg.norm(v)
@@ -142,7 +142,7 @@ class ObjFile:
             return v
         else:
             return v/v2
-    
+
     def QuadToTria(self):
         trifaces=[]
         for f in self.faces:
@@ -154,10 +154,10 @@ class ObjFile:
                 trifaces.append(f1)
                 trifaces.append(f2)
         return trifaces
-    
+
     @staticmethod
     def ScaleVal(v,scale,minval=True):
-        
+
         if minval:
             if v>0:
                 return v*(1.-scale)
@@ -168,7 +168,7 @@ class ObjFile:
                 return v*scale
             else:
                 return v*(1.-scale)
-            
+
 
     def Plot(self, output_file=None, elevation=None, azim=None,width=None,height=None,scale=None,animate=None):
         plt.ioff()
@@ -180,7 +180,7 @@ class ObjFile:
         ax.axis('off')
         fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
         # enforce aspect ratio to avoid streching, see Issue https://github.com/pclausen/obj2png/issues/7
-        limits = np.array([getattr(ax, f'get_{axis}lim')() for axis in 'xyz']) 
+        limits = np.array([getattr(ax, f'get_{axis}lim')() for axis in 'xyz'])
         ax.set_box_aspect(np.ptp(limits, axis = 1))
 
         nmin,nmax=self.MinMaxNodes()
@@ -196,7 +196,7 @@ class ObjFile:
             ax.view_init(30, azim)
         else:
             ax.view_init(30, 30)
-         
+
         if output_file:
             #fig.tight_layout()
             #fig.subplots_adjust(left=-0.2, bottom=-0.2, right=1.2, top=1.2,
@@ -228,5 +228,5 @@ class ObjFile:
                         textvar.remove()
             else:
                 plt.show()
-    
+
 
